@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Main Menu</string>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>

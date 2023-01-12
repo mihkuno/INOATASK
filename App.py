@@ -1,17 +1,18 @@
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QLabel, QGridLayout
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QLabel, QDateEdit, QPlainTextEdit, QRadioButton
 import sys
 import random
+import jsonlines
 
 class Game(QMainWindow):
     def __init__(self):
         super(Game, self).__init__()
         
         # load ui file
-        uic.loadUi("assets/game-screen.ui", self)
+        uic.loadUi("assets/game.ui", self)
         
-         # define objects and set event listener        
+        # define objects and set event listener        
         self.btn_tiles = []
        
         btn_count = 0
@@ -169,6 +170,65 @@ class Calculator(QMainWindow):
         self.label.setText(output)
     
 
+class SignUp(QMainWindow):
+    def __init__(self):
+        super(SignUp, self).__init__()
+        
+        # load ui file
+        uic.loadUi("assets/signup.ui", self)
+        
+        # define objects
+        self.btn_signup = self.findChild(QPushButton, "btn_signup")
+        self.in_ubdate = self.findChild(QDateEdit, "in_ubdate")
+        self.in_uname = self.findChild(QPlainTextEdit, "in_uname")
+        self.in_upasw = self.findChild(QPlainTextEdit, "in_upasw")
+        self.in_upref1 = self.findChild(QRadioButton, "in_upref1")
+        self.in_upref2 = self.findChild(QRadioButton, "in_upref2")
+        self.out_label = self.findChild(QLabel, "out_label")
+        
+        # set event listener 
+        self.btn_signup.clicked.connect(self.getUserInput)
+        
+    
+    def getUserInput(self):
+        uname = self.in_uname.toPlainText()
+        upasw = self.in_upasw.toPlainText()
+        ubdate = str(self.in_ubdate.date().toPyDate())
+        upref = ''
+        
+        if self.in_upref1.isChecked():
+            upref = self.in_upref1.text()
+        elif self.in_upref2.isChecked():
+            upref = self.in_upref2.text()
+
+        self.createUser(uname, upasw, ubdate, upref)
+    
+    
+    def createUser(self, uname, upasw, ubdate, upref):
+        # data to be written
+        new_user = {
+            "username": uname,
+            "password": upasw,
+            "birthdate": ubdate,
+            "preference": upref
+        }
+        
+        with jsonlines.open("users.jsonl", "a") as writer:   # for writing
+            writer.write(new_user)
+
+        with jsonlines.open('users.jsonl') as reader:      # for reading
+            for obj in reader:
+                print(obj)     
+                
+
+class LogIn(QMainWindow):
+    def __init__(self):
+        super(LogIn, self).__init__()
+        
+        # load ui file
+        uic.loadUi("assets/login.ui", self)
+        
+        
 class MainMenu(QMainWindow):
     def __init__(self):
         super(MainMenu, self).__init__()
@@ -202,6 +262,14 @@ class MainMenu(QMainWindow):
         if sender == 'Game':
             self.game = Game()
             self.game.show()
+            
+        if sender == 'Sign Up':
+            self.signup = SignUp()
+            self.signup.show()
+            
+        if sender == 'Log In':
+            self.login = LogIn()
+            self.login.show()
         
 
 # boilerplate

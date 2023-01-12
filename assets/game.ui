@@ -48,7 +48,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -70,7 +70,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -92,7 +92,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -114,7 +114,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -136,7 +136,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -158,7 +158,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -180,7 +180,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -202,7 +202,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -224,7 +224,7 @@
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string>-</string>
+        <string/>
        </property>
       </widget>
      </item>
