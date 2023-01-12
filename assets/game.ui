@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Tic-Tac-Toe</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #202020;  color: whitesmoke</string>
@@ -31,7 +31,7 @@
       <number>0</number>
      </property>
      <item row="1" column="1">
-      <widget class="QPushButton" name="pushButton_26">
+      <widget class="QPushButton" name="btn_4">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -41,19 +41,19 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QPushButton" name="pushButton_22">
+      <widget class="QPushButton" name="btn_0">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -63,19 +63,19 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QPushButton" name="pushButton_25">
+      <widget class="QPushButton" name="btn_3">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -85,19 +85,19 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>
      <item row="0" column="2">
-      <widget class="QPushButton" name="pushButton_24">
+      <widget class="QPushButton" name="btn_2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -107,19 +107,19 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QPushButton" name="pushButton_27">
+      <widget class="QPushButton" name="btn_5">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -129,19 +129,19 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="pushButton_23">
+      <widget class="QPushButton" name="btn_1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -151,19 +151,19 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QPushButton" name="pushButton_28">
+      <widget class="QPushButton" name="btn_6">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -173,19 +173,19 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QPushButton" name="pushButton_29">
+      <widget class="QPushButton" name="btn_7">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -195,19 +195,19 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="QPushButton" name="pushButton_30">
+      <widget class="QPushButton" name="btn_8">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -217,14 +217,14 @@
        <property name="font">
         <font>
          <family>Segoe UI Variable Text Semibold</family>
-         <pointsize>12</pointsize>
+         <pointsize>32</pointsize>
         </font>
        </property>
        <property name="styleSheet">
         <string notr="true">color: whitesmoke; background-color: #7158e2</string>
        </property>
        <property name="text">
-        <string/>
+        <string>-</string>
        </property>
       </widget>
      </item>

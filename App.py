@@ -1,6 +1,126 @@
 from PyQt5 import uic
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QLabel
+from PyQt5.QtCore import QTimer
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QLabel, QGridLayout
 import sys
+import random
+
+class Game(QMainWindow):
+    def __init__(self):
+        super(Game, self).__init__()
+        
+        # load ui file
+        uic.loadUi("assets/game-screen.ui", self)
+        
+         # define objects and set event listener        
+        self.btn_tiles = []
+       
+        btn_count = 0
+        for row in range(3):
+            bucket = []
+            for col in range(3):
+                object = self.findChild(QPushButton, f"btn_{btn_count}")
+                object.clicked.connect(self.onClick)
+                bucket.append(object)
+                btn_count += 1
+            self.btn_tiles.append(bucket)        
+        
+        self.human = random.choice(['X', 'O'])
+        self.robot = 'X' if self.human == 'O' else 'O'        
+        
+        if self.robot == 'X': self.robotMove()
+       
+        
+    def onClick(self):   
+        # player clicks
+        self.sender().setText(self.human)
+        
+        # check tiles
+        result = self.checkTiles(self.human)
+
+        # disable all tiles
+        self.pauseTiles(True)
+        
+        if result: 
+            self.gameOver('human')
+            self.pauseTiles(True)
+        else:        
+            QTimer.singleShot(1000, self.robotMove)
+                
+            
+    def robotMove(self):
+        # robot clicks
+        while True:
+            rb_col = random.randint(0,2)
+            rb_row = random.randint(0,2)
+            selected = self.btn_tiles[rb_row][rb_col]
+            
+            if not selected.text().isalpha():
+                selected.setStyleSheet("""color: red; 
+                                       background-color: #7158e2""")
+                
+                selected.setText(self.robot)
+                break
+        
+        # check tiles
+        result = self.checkTiles(self.robot)
+        
+        # enable all tiles
+        self.pauseTiles(False)
+
+        if result: 
+            self.gameOver('robot')
+            self.pauseTiles(True)
+            return True
+                
+        
+    def pauseTiles(self, state):
+        for row in self.btn_tiles:
+            for col in row: 
+                col.setEnabled(not state)
+            
+        
+    def checkTiles(self, player):
+        tiles_initial = []
+        for row in range(3):
+            col = self.btn_tiles[row]
+            col = tuple(map(lambda row: 1 if row.text() == player else 0, col))
+            tiles_initial.append(col)
+
+        tiles_rotate = list(zip(*reversed(tiles_initial)))
+
+        tiles_forward = []
+        for ix, row in enumerate(tiles_initial):
+            tiles_forward.append(row[ix])
+        
+        tiles_backward = []
+        for ix, row in enumerate(tiles_initial):
+            tiles_backward.append(row[2-ix])
+            
+        result = False
+        
+        if sum(tiles_forward) == 3: result = True
+        
+        if sum(tiles_backward) == 3: result = True
+                        
+        for row in tiles_initial:
+            if sum(row) == 3: result = True
+        
+        for col in tiles_rotate:
+            if sum(col) == 3: result = True
+        
+        return result
+        
+
+    def gameOver(self, player):
+        for row in self.btn_tiles:
+            for col in row: 
+                if player == 'human':
+                    col.setStyleSheet("""color: chartreuse; 
+                                    background-color: #303030""")
+                elif player == 'robot':
+                    col.setStyleSheet("""color: red; 
+                                    background-color: #303030""")
+
 
 class Calculator(QMainWindow):
     def __init__(self):
@@ -14,8 +134,9 @@ class Calculator(QMainWindow):
         
         self.btn_number = []
         for i in range(10):
-            self.btn_number.append(self.findChild(QPushButton, f"btn_{i}"))
-            self.btn_number[i].clicked.connect(self.onClick)
+            object = self.findChild(QPushButton, f"btn_{i}")
+            object.clicked.connect(self.onClick)
+            self.btn_number.append(object)
         
         self.btn_function = ["btn_clear", 
                              "btn_divide", 
@@ -62,8 +183,6 @@ class MainMenu(QMainWindow):
         self.btn_calculator = self.findChild(QPushButton, "btn_calculator")
         self.btn_game = self.findChild(QPushButton, "btn_game")
         
-        self.calculator = Calculator()
-        
         # event listener
         self.btn_login.clicked.connect(self.onClick)
         self.btn_signup.clicked.connect(self.onClick)
@@ -77,14 +196,17 @@ class MainMenu(QMainWindow):
         print(sender+' was pressed')
         
         if sender == 'Calculator':
+            self.calculator = Calculator()
             self.calculator.show()    
+            
+        if sender == 'Game':
+            self.game = Game()
+            self.game.show()
         
-
 
 # boilerplate
 app = QApplication(sys.argv)
 win = MainMenu()
 win.show()
-
 
 sys.exit(app.exec_())
