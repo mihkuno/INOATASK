@@ -54,10 +54,10 @@
      <bool>false</bool>
     </property>
     <property name="placeholderText">
-     <string>enter your username</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="in_pasw">
+   <widget class="QPlainTextEdit" name="in_upasw">
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -75,7 +75,7 @@
      <string notr="true">background-color: whitesmoke; border-radius: 25px</string>
     </property>
     <property name="placeholderText">
-     <string>enter your password</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -94,7 +94,7 @@
      <string>Password</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btn_upasw">
+   <widget class="QPushButton" name="btn_login">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -102,6 +102,15 @@
       <width>211</width>
       <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Text Semibold</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">color: white; background-color: #7158e2; border-radius: 30px
@@ -123,14 +132,14 @@
     <property name="font">
      <font>
       <family>Segoe UI Variable Text Semibold</family>
-      <pointsize>14</pointsize>
+      <pointsize>8</pointsize>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">color: whitesmoke; background-color: #202020;</string>
     </property>
     <property name="text">
-     <string>Welcome back! Joeninyo</string>
+     <string>Hello User!</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

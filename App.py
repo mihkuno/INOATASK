@@ -201,8 +201,12 @@ class SignUp(QMainWindow):
         elif self.in_upref2.isChecked():
             upref = self.in_upref2.text()
 
-        self.createUser(uname, upasw, ubdate, upref)
-    
+        if self.checkUserExists():
+            self.out_label.setText(f"The account, '{uname}' already exists!")
+        else:
+            self.out_label.setText(f'Nice to meet you, {uname}')
+            self.createUser(uname, upasw, ubdate, upref)
+        
     
     def createUser(self, uname, upasw, ubdate, upref):
         # data to be written
@@ -215,11 +219,14 @@ class SignUp(QMainWindow):
         
         with jsonlines.open("users.jsonl", "a") as writer:   # for writing
             writer.write(new_user)
-
+    
+    
+    def checkUserExists(self):
         with jsonlines.open('users.jsonl') as reader:      # for reading
             for obj in reader:
-                print(obj)     
-                
+                if self.in_uname.toPlainText() == obj['username']:
+                    return True
+                               
 
 class LogIn(QMainWindow):
     def __init__(self):
@@ -228,6 +235,26 @@ class LogIn(QMainWindow):
         # load ui file
         uic.loadUi("assets/login.ui", self)
         
+        # define objects
+        self.in_uname = self.findChild(QPlainTextEdit, "in_uname")
+        self.in_upasw = self.findChild(QPlainTextEdit, "in_upasw")
+        self.btn_login = self.findChild(QPushButton, "btn_login")
+        self.out_label = self.findChild(QLabel, "out_label")
+        
+        # set event listener
+        self.btn_login.clicked.connect(self.checkUserExists)
+        
+                
+    def checkUserExists(self):        
+        with jsonlines.open('users.jsonl') as reader:      # for reading
+            for obj in reader:
+                if self.in_uname.toPlainText() == obj['username']:
+                    if self.in_upasw.toPlainText() != obj['password']:
+                        self.out_label.setText(f"Incorrect Password")
+                    else:
+                        self.out_label.setText(f"Welcome back, {obj['username']}!")
+                    break
+                
         
 class MainMenu(QMainWindow):
     def __init__(self):

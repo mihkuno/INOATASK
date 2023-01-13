@@ -29,10 +29,13 @@
     <property name="font">
      <font>
       <family>Segoe UI Variable Text Semibold</family>
-      <pointsize>12</pointsize>
+      <pointsize>11</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">color: white; background-color: #7158e2; border-radius: 30px
@@ -206,7 +209,7 @@
      <string notr="true">color: whitesmoke; background-color: #202020;</string>
     </property>
     <property name="text">
-     <string>Nice to meet you, Joeninyo</string>
+     <string>Hello User!</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
