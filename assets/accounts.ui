@@ -11,30 +11,29 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Accounts</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #202020</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListWidget" name="listWidget">
+   <widget class="QListWidget" name="list_accounts">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>90</y>
-      <width>256</width>
-      <height>192</height>
+      <x>0</x>
+      <y>0</y>
+      <width>551</width>
+      <height>501</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QListView" name="listView">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>300</y>
-      <width>256</width>
-      <height>192</height>
-     </rect>
+    <property name="font">
+     <font>
+      <family>Segoe UI Variable Text Semibold</family>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: whitesmoke</string>
     </property>
    </widget>
   </widget>

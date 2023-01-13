@@ -1,6 +1,6 @@
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QLabel, QDateEdit, QPlainTextEdit, QRadioButton
+from PyQt5.QtWidgets import QMainWindow, QApplication, QPushButton, QLabel, QDateEdit, QLineEdit, QRadioButton, QListWidget
 import sys
 import random
 import jsonlines
@@ -12,7 +12,8 @@ class Game(QMainWindow):
         # load ui file
         uic.loadUi("assets/game.ui", self)
         
-        # define objects and set event listener        
+        # define objects and set event listener      
+        self.available_tiles = 9  
         self.btn_tiles = []
        
         btn_count = 0
@@ -81,6 +82,8 @@ class Game(QMainWindow):
             
         
     def checkTiles(self, player):
+        result = False
+                
         tiles_initial = []
         for row in range(3):
             col = self.btn_tiles[row]
@@ -96,8 +99,6 @@ class Game(QMainWindow):
         tiles_backward = []
         for ix, row in enumerate(tiles_initial):
             tiles_backward.append(row[2-ix])
-            
-        result = False
         
         if sum(tiles_forward) == 3: result = True
         
@@ -108,6 +109,9 @@ class Game(QMainWindow):
         
         for col in tiles_rotate:
             if sum(col) == 3: result = True
+            
+        if self.available_tiles == 1: result = True
+        self.available_tiles -= 1
         
         return result
         
@@ -180,8 +184,8 @@ class SignUp(QMainWindow):
         # define objects
         self.btn_signup = self.findChild(QPushButton, "btn_signup")
         self.in_ubdate = self.findChild(QDateEdit, "in_ubdate")
-        self.in_uname = self.findChild(QPlainTextEdit, "in_uname")
-        self.in_upasw = self.findChild(QPlainTextEdit, "in_upasw")
+        self.in_uname = self.findChild(QLineEdit, "in_uname")
+        self.in_upasw = self.findChild(QLineEdit, "in_upasw")
         self.in_upref1 = self.findChild(QRadioButton, "in_upref1")
         self.in_upref2 = self.findChild(QRadioButton, "in_upref2")
         self.out_label = self.findChild(QLabel, "out_label")
@@ -191,8 +195,8 @@ class SignUp(QMainWindow):
         
     
     def getUserInput(self):
-        uname = self.in_uname.toPlainText()
-        upasw = self.in_upasw.toPlainText()
+        uname = self.in_uname.text()
+        upasw = self.in_upasw.text()
         ubdate = str(self.in_ubdate.date().toPyDate())
         upref = ''
         
@@ -222,10 +226,13 @@ class SignUp(QMainWindow):
     
     
     def checkUserExists(self):
-        with jsonlines.open('users.jsonl') as reader:      # for reading
-            for obj in reader:
-                if self.in_uname.toPlainText() == obj['username']:
-                    return True
+        try:
+            with jsonlines.open('users.jsonl') as reader:      # for reading
+                for obj in reader:
+                    if self.in_uname.text() == obj['username']:
+                        return True
+        except: 
+            return False
                                
 
 class LogIn(QMainWindow):
@@ -236,8 +243,8 @@ class LogIn(QMainWindow):
         uic.loadUi("assets/login.ui", self)
         
         # define objects
-        self.in_uname = self.findChild(QPlainTextEdit, "in_uname")
-        self.in_upasw = self.findChild(QPlainTextEdit, "in_upasw")
+        self.in_uname = self.findChild(QLineEdit, "in_uname")
+        self.in_upasw = self.findChild(QLineEdit, "in_upasw")
         self.btn_login = self.findChild(QPushButton, "btn_login")
         self.out_label = self.findChild(QLabel, "out_label")
         
@@ -246,15 +253,38 @@ class LogIn(QMainWindow):
         
                 
     def checkUserExists(self):        
+        try:
+            with jsonlines.open('users.jsonl') as reader:      # for reading
+                for obj in reader:
+                    if self.in_uname.text() == obj['username']:
+                        if self.in_upasw.text() != obj['password']:
+                            self.out_label.setText(f"Incorrect Password")
+                        else:
+                            self.out_label.setText(f"Welcome back, {obj['username']}!")
+                        break
+                    else:
+                        self.out_label.setText(f"The account '{self.in_uname.text()}' does not exist")
+        except:
+            self.out_label.setText(f"The account '{self.in_uname.text()}' does not exist")
+            
+
+
+class Accounts(QMainWindow):
+    def __init__(self):
+        super(Accounts, self).__init__()
+        
+        # load ui file
+        uic.loadUi("assets/accounts.ui", self)
+        
+        # define objects
+        self.list_accounts = self.findChild(QListWidget, "list_accounts")
+        
+        # set data to list widget
         with jsonlines.open('users.jsonl') as reader:      # for reading
             for obj in reader:
-                if self.in_uname.toPlainText() == obj['username']:
-                    if self.in_upasw.toPlainText() != obj['password']:
-                        self.out_label.setText(f"Incorrect Password")
-                    else:
-                        self.out_label.setText(f"Welcome back, {obj['username']}!")
-                    break
-                
+                self.list_accounts.addItem(str(obj))
+        
+               
         
 class MainMenu(QMainWindow):
     def __init__(self):
@@ -297,6 +327,11 @@ class MainMenu(QMainWindow):
         if sender == 'Log In':
             self.login = LogIn()
             self.login.show()
+            
+        if sender == 'Accounts':
+            self.accounts = Accounts()
+            self.accounts.show()
+            
         
 
 # boilerplate
